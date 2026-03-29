@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Resume from "./Resume";
 import AllProjects from "./projects/AllProjects";
+import Background from "./background/Background";
 
 const DraggableWindow = ({ openFile, onClose, prop }) => {
   const [position, setPosition] = useState({ x: 100, y: 100 });
@@ -89,6 +90,8 @@ const DraggableWindow = ({ openFile, onClose, prop }) => {
         {prop.name === "Resume" && <Resume />}
 
         {prop.name === "My Projects" && <AllProjects openFile={openFile} />}
+
+        {prop.name === "Background" && <Background />}
 
         {file?.type === "pdf" && (
           <iframe src={file.url} className="w-full h-full" />
