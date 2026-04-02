@@ -6,7 +6,7 @@ const AllProjects = ({ openFile }) => {
   const [windows, setWindows] = useState([]);
 
   useEffect(() => {
-    fetch("https://windows-portfolio-dhln.onrender.com/api/projects/api/projects/all")
+    fetch("https://windows-portfolio-dhln.onrender.com/api/projects/all")
       .then((res) => res.json())
       .then((data) => {
         setFiles(data.data);
