@@ -6,7 +6,7 @@ const AllProjects = ({ openFile }) => {
   const [windows, setWindows] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5005/api/projects/all")
+    fetch("https://windows-portfolio-kappa.vercel.app/api/projects/all")
       .then((res) => res.json())
       .then((data) => {
         setFiles(data.data);
