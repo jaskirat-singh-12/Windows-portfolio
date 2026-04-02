@@ -58,7 +58,7 @@ useEffect(() => {
   const token = localStorage.getItem("token");
 
   if (!token) {
-      fetch("http://localhost:5005/api/user/guest")
+      fetch("https://windows-portfolio-dhln.onrender.com/api/user/guest")
           .then(res => res.json())
           .then(data => {
               localStorage.setItem("token", data.token);
@@ -87,7 +87,7 @@ const loadBackground = async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:5005/api/user/background", {
+    const res = await fetch("https://windows-portfolio-dhln.onrender.com/api/user/background", {
       headers: {
         Authorization: `Bearer ${token}`
       }

@@ -30,7 +30,7 @@ const Background = () => {
     // Save to backend
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:5005/api/user/background-preset", {
+      const response = await fetch("https://windows-portfolio-dhln.onrender.com/api/user/background-preset", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const Background = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:5005/api/user/background", {
+      const res = await fetch("https://windows-portfolio-dhln.onrender.com/api/user/background", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`
@@ -113,7 +113,7 @@ const Background = () => {
       const token = localStorage.getItem("token");
 
       try {
-        const res = await fetch("http://localhost:5005/api/user/background", {
+        const res = await fetch("https://windows-portfolio-dhln.onrender.com/api/user/background", {
           headers: {
             Authorization: `Bearer ${token}`
           }

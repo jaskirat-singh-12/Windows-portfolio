@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Resume = () => {
     const [resume, setResume] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:5005/api/resume/all`)
+    fetch(`https://windows-portfolio-dhln.onrender.com/api/resume/all`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
