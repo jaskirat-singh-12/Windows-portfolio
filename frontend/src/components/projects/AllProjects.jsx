@@ -40,8 +40,8 @@ const AllProjects = ({ openFile }) => {
 return (
   <div>
     {files.map((file, index) => {
-      const x = file.positionX + ((index % 5) * 120 + 20) - 55;
-      const y = file.positionY + (Math.floor(index / 5) * 120 + 20) - 40;
+      const x = file.positionX ?? (Math.floor(index / 5) * 120 + 20);
+      const y = file.positionY ?? ((index % 5) * 120 + 100);
 
       return (
         <div
