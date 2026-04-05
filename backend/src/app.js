@@ -10,8 +10,7 @@ const localUserRoutes = require("./routes/user.routes");
 
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5173",
-  origin: "https://windows-portfolio-kappa.vercel.app",
+  origin: ["http://localhost:5173", "https://windows-portfolio-kappa.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"]
 })); 
