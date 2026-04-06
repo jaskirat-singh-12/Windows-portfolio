@@ -4,15 +4,17 @@ import DraggableWindow from "./DraggableWindow";
 import folder from "../assets/folder.png";
 import Context from "./Context";
 import DownNav from "./DownNav";
+import InstructionsModal from "./InstructionsModal";
 import { useEffect } from "react";
 
 const Folder = () => {
   const [drag, setDrag] = useState(false);
   const [windows, setWindows] = useState([]);
   const [backgroundImage, setBackgroundImage] = useState("");
+  const [showInstructions, setShowInstructions] = useState(false);
   const [folderPositions, setFolderPositions] = useState({
     folder1: { x: 20, y: 20 },
-    folder2: { x: 20, y: 100 }
+    folder2: { x: 20, y: 130 }
   });
   const [draggingFolder, setDraggingFolder] = useState(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -30,6 +32,20 @@ const openBackground = () => {
   setWindows((prev) => [
     ...prev,
     { name: "Background" }
+  ]);
+};
+
+const openChrome = () => {
+  setWindows((prev) => [
+    ...prev,
+    { name: "Chrome" }
+  ]);
+};
+
+const openSearch = (query = "") => {
+  setWindows((prev) => [
+    ...prev,
+    { name: "Search", searchQuery: query }
   ]);
 };
 
@@ -67,6 +83,14 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
+  const hasSeenInstructions = localStorage.getItem("hasSeenInstructions");
+  if (!hasSeenInstructions) {
+    setShowInstructions(true);
+    localStorage.setItem("hasSeenInstructions", "true");
+  }
+}, []);
+
+useEffect(() => {
   loadBackground();
 }, []);
 
@@ -85,7 +109,7 @@ useEffect(() => {
 
 const loadBackground = async () => {
   const token = localStorage.getItem("token");
-
+  // console.log("Token:", token);
   try {
     const res = await fetch("https://windows-portfolio-dhln.onrender.com/api/user/background", {
       headers: {
@@ -94,7 +118,7 @@ const loadBackground = async () => {
     });
 
     const data = await res.json();
-    console.log("Background data:", data);
+    // console.log("Background data:", data);
 
     // Try multiple possible property names
     const imageUrl = data.background || data.imageUrl || data.url || data.backgroundUrl;
@@ -173,7 +197,7 @@ const loadBackground = async () => {
           className="w-20"
           onContextMenu={(e) => {
             e.preventDefault();
-            console.log(e.clientX, e.clientY);
+            // console.log(e.clientX, e.clientY);
             setPosition({ left: e.clientX, top: e.clientY });
           }}
         >
@@ -190,10 +214,10 @@ const loadBackground = async () => {
               style={{
                 position: 'absolute',
                 left: `${folderPositions[folderItem.id].x}px`,
-                top: `${folderPositions[folderItem.id].y}px`,
+                top: `${folderPositions[folderItem.id].y }px`,
                 cursor: draggingFolder === folderItem.id ? 'grabbing' : 'grab'
               }}
-              className="px-2 py-4 rounded h-7 w-20 text-white select-none transition-all"
+              className="px-2 py-4 rounded h-7 w-20 text-white select-none transition-all "
             >
               <img src={folder} alt="folder" />
               {folderItem.name}
@@ -215,7 +239,10 @@ const loadBackground = async () => {
           ))}
         </div>
       </div>
-      <DownNav onOpenBackground={openBackground} />
+      <DownNav onOpenBackground={openBackground} onOpenChrome={openChrome} onOpenSearch={openSearch} />
+      {showInstructions && (
+        <InstructionsModal onClose={() => setShowInstructions(false)} />
+      )}
     </div>
   );
 };

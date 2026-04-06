@@ -6,7 +6,7 @@ const Resume = () => {
     fetch(`https://windows-portfolio-dhln.onrender.com/api/resume/all`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setResume(data[0].url);
       })
       .catch((err) => {

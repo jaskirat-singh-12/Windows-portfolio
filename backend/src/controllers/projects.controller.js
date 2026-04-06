@@ -15,8 +15,10 @@ const projectCreateController = async (req, res) => {
     }
     const count = await Project.countDocuments();
 
-    const positionX = (count % 5) * 120 + 20;
-    const positionY = Math.floor(count / 5) * 120 + 20;
+    const iconsPerColumn = 6;
+    const gap = 90;
+    const positionX = Math.floor(count / iconsPerColumn) * gap + 20;
+    const positionY = (count % iconsPerColumn) * gap + 80;
 
     const project = await Project.create({
       name,

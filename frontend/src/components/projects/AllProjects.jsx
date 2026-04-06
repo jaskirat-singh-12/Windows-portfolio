@@ -40,8 +40,11 @@ const AllProjects = ({ openFile }) => {
 return (
   <div>
     {files.map((file, index) => {
-      const x = file.positionX ?? (Math.floor(index / 5) * 120 + 20);
-      const y = file.positionY ?? ((index % 5) * 120 + 100);
+      const iconsPerColumn = 6;
+      const gap = 90;
+
+      const x =  (Math.floor(index / iconsPerColumn) * gap + 20);
+      const y =  ((index % iconsPerColumn) * gap + 80);
 
       return (
         <div
@@ -52,7 +55,10 @@ return (
             top: y,
           }}
           className="w-24 text-center text-white cursor-pointer"
-          onDoubleClick={() => openFile(file)}
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            openFile(file);
+          }}
         >
           <img src={file.thumbnail} className="w-16 h-16 mx-auto" />
           <p className="text-sm mt-1">{file.name}</p>
@@ -63,31 +69,5 @@ return (
 );
 
 }
-
-// {files.map((file, index) => {
-//   const x = file.positionX ?? (Math.floor(index / 5) * 120 + 20);
-//   const y = file.positionY ?? ((index % 5) * 120 + 20);
-
-//   return (
-//     <div>
-    
-//         <div
-//           key={file._id}
-//           style={{
-//             position: "absolute ",
-//             left: file.positionX,
-//             top: file.positionY,
-//           }}
-//           className="w-24 text-center text-white cursor-pointer"
-//           onDoubleClick={() => openFile(file)}
-//         >
-//           <img src={file.thumbnail} className="w-16 h-16 mx-auto" />
-//           <p className="text-sm mt-1">{file.name}</p>
-//         </div>
-//     </div>
-//   );
-// })}
-
-{/* }; */}
 
 export default AllProjects;

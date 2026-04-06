@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Resume from "./Resume";
 import AllProjects from "./projects/AllProjects";
 import Background from "./background/Background";
+import Browser from "./Browser";
+import SearchWindow from "./SearchWindow";
 
 const DraggableWindow = ({ openFile, onClose, prop }) => {
   const [position, setPosition] = useState({ x: 100, y: 100 });
@@ -93,6 +95,10 @@ const DraggableWindow = ({ openFile, onClose, prop }) => {
 
         {prop.name === "Background" && <Background />}
 
+        {prop.name === "Chrome" && <Browser />}
+
+        {prop.name === "Search" && <SearchWindow searchQuery={file?.searchQuery || ""} />}
+
         {file?.type === "pdf" && (
           <iframe src={file.url} className="w-full h-full" />
         )}
@@ -108,8 +114,6 @@ const DraggableWindow = ({ openFile, onClose, prop }) => {
           <iframe src={file.url} className="w-full h-full" title={file.name} />
         )}
       </div>
-      {/* <div className="flex-1 w-full h-full p-0 overflow-auto bg-black">{ isResume && <Resume />}</div>
-      <div className="flex-1 w-full h-full p-0 overflow-auto bg-black">{ !isResume && <AllProjects openFile={setOpenedFile}/>}</div> */}
     </div>
   );
 };
